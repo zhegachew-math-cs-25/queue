@@ -1,0 +1,112 @@
+#include "stdafx.h"
+#include "queue.h"
+#include <iostream>
+#include <clocale>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	int a = 0;
+	int val = 0;
+	int num;
+
+	node *first = NULL;
+	node *last = NULL;
+
+	bool first_num = true;
+
+	cout << "**********************************************************************" << endl;
+	cout << "***   1. Добавить первый элемент в очередь                         ***" << endl;
+	cout << "***   2. Добавить элементы                                         ***" << endl;
+	cout << "***   3. Удалить элементы очереди                                   ***" << endl;
+	cout << "***   4. Чтобы вывести очередь на экран                            ***" << endl;
+	cout << "***   0. Чтобы выйти из программы                                  ***" << endl;
+	cout << "**********************************************************************" << endl;
+	cout << endl;
+
+
+
+	while (1)
+	{
+		cout << "Номер команды > ";
+
+		cin >> num;
+
+		switch (num)
+		{
+		case 1:
+		{
+			cout << "Введите первый элемент -> ";
+			cin >> val;
+			first_add(val, &first);
+			cout << "Первый элемент добавлен в очередь! \n";
+			break;
+		}
+		case 2:
+		{
+			if (first == NULL)
+			{
+				cout << "Введите первый элемент -> ";
+				cin >> val;
+				first_add(val, &first);
+				cout << "Первый элемент добавлен в очередь! \n";
+			}
+			else
+			{
+				do
+				{
+					cout << "Введите элемент -> ";
+					cin >> val;
+					if (val == 0)
+					{
+						break;
+					}
+					add(val, &first);
+				} while (true);
+				cout << "Элементы очереди введены! \n";
+			}
+			break;
+		}
+
+		case 3:
+		{
+			if (isEmpty(first))
+			{
+				cout << "Очередь пуста! \n";
+			}
+			else
+			{
+				pop(&first);
+				cout << "Очередь удалена!" << endl;
+			}
+
+			break;
+		}
+
+		
+		case 4:
+		{
+			if (isEmpty(first))
+			{
+				cout << "Очередь пуста! \n";
+			}
+			else
+			{
+                cout << "Очередь:" ;
+				print(&first);
+			}
+
+			break;
+		}
+
+
+
+		case 0:
+			return 0;
+		}
+	}
+}
+
