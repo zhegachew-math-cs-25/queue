@@ -1,88 +1,53 @@
 #include "stdafx.h"
-#include "queue.h"
 #include <iostream>
-
-
+#include "queue.h"
 using namespace std;
 
-
-/*
-* brief: добавление в очередь первого элемента
-* in: целочисленная переменная и указатель на указатель на вершину очереди
-* out: - 
-*/
-void first_add(int val, node **first)
+void add(int val, Node **last)
 {
-	node *q = new node;
-	q->val = val;
-	q->next = nullptr;
-	*first = q;
+	Node *p = new Node;
+	p->val = val; //(*p).val = val;
+	p->next = *last;
+	*last = p;
 }
 
 
-/*
-* brief: добавление элемента
-* in: целочисленная переменная и указатель на указатель на вершину очереди
-* out: - 
-*/
-void add(int val, node **last)
+
+void add_first(int val, Node **first, Node **last)
 {
-	node *q = new node;
-	q->val = val;
-	q->next = *last;
-	*last = q;
+	Node *p = new Node;
+	p->val = val; //(*p).val = val;
+	p->next = NULL;
+	*first = *last = p;
 }
 
 
-/*
-* brief: удаление элемента 
-* in: указатель на указатель на вершину очереди
-* out: целочисленная переменная
-*/
-int pop(node **first)
+int del(Node **first)
 {
-	int tval = (*first)->val; // (**first).val;
-	node * tmp_node = *first;
+	int tval = (*first)->val; //(**first).val
+	Node *tNode = *first;
 	*first = (*first)->next;
-	delete tmp_node;
+	delete tNode;
 	return tval;
 }
 
 
-/*
-* brief: проверка на пустоту
-* in: указатель на структуру
-* out: true or false
-*/
-bool isEmpty(node *a)
+void print(Node **first)
 {
-	if (!a)
+	while (*first)
 	{
-		return true;
-	}
-	else
-	{
-		return false;
+		cout << del(first);
 	}
 }
-
-
-/*
-* brief: функция выводящая очередь на экран
-* in: указатель на указатель вершины очереди
-* out: - 
-*/
-void print(node **first)
+bool isEmpty(Node *first)
 {
-	cout << "*";
-	{
-		while (*first)
-		{
-			cout << pop(first) << ' ';
-		}
-	}
-	cout << "*";
-	cout << endl;
+    if(!first)
+    {
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
 }
-
-
